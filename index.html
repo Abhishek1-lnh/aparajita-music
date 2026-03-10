@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🎵 MyMusic - For Aparajita 💕</title>
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0a0a1a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="description" content="Music App for Aparajita - Hindi & Bengali Songs, No Ads">
+
+    <!-- Icons -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ============ SPLASH SCREEN ============ -->
+    <div id="splashScreen" class="splash-screen">
+        <div class="splash-content">
+            <div class="splash-icon">🎵</div>
+            <h1>MyMusic</h1>
+            <p>For Aparajita 💕</p>
+            <div class="splash-loader"></div>
+        </div>
+    </div>
+
+    <!-- ============ SIDEBAR ============ -->
+    <div class="sidebar" id="sidebar">
+        <div class="logo">
+            <div class="logo-icon">🎵</div>
+            <div>
+                <span class="logo-text">MyMusic</span>
+                <small class="logo-sub">For Aparajita 💕</small>
+            </div>
+        </div>
+
+        <div class="sidebar-search">
+            <i class="fas fa-search"></i>
+            <input type="text" id="sidebarSearch" placeholder="Quick search..."
+                onkeypress="if(event.key==='Enter'){searchSongs(this.value); showPage('search');}">
+        </div>
+
+        <nav>
+            <p class="nav-label">MENU</p>
+            <a href="#" class="nav-item active" data-page="home" onclick="showPage('home')">
+                <i class="fas fa-home"></i> <span>Home</span>
+            </a>
+            <a href="#" class="nav-item" data-page="search" onclick="showPage('search')">
+                <i class="fas fa-search"></i> <span>Search</span>
+            </a>
+            <a href="#" class="nav-item" data-page="trending" onclick="showPage('trending')">
+                <i class="fas fa-fire"></i> <span>Trending</span>
+            </a>
+
+            <p class="nav-label">COLLECTIONS</p>
+            <a href="#" class="nav-item" data-page="hindi" onclick="showPage('hindi')">
+                <i class="fas fa-star"></i> <span>Hindi Classics</span>
+            </a>
+            <a href="#" class="nav-item" data-page="bengali" onclick="showPage('bengali')">
+                <i class="fas fa-star"></i> <span>Bengali Classics</span>
+            </a>
+            <a href="#" class="nav-item" data-page="bollywood" onclick="showPage('bollywood')">
+                <i class="fas fa-film"></i> <span>Bollywood Hits</span>
+            </a>
+            <a href="#" class="nav-item" data-page="youtube" onclick="showPage('youtube')">
+                <i class="fab fa-youtube"></i> <span>YouTube Music</span>
+            </a>
+
+            <p class="nav-label">MY MUSIC</p>
+            <a href="#" class="nav-item" data-page="playlist" onclick="showPage('playlist')">
+                <i class="fas fa-list"></i> <span>My Playlist</span>
+                <span class="badge" id="playlistCount">0</span>
+            </a>
+            <a href="#" class="nav-item" data-page="favorites" onclick="showPage('favorites')">
+                <i class="fas fa-heart"></i> <span>Favorites</span>
+            </a>
+            <a href="#" class="nav-item" data-page="history" onclick="showPage('history')">
+                <i class="fas fa-history"></i> <span>History</span>
+            </a>
+
+            <p class="nav-label">SPECIAL</p>
+            <a href="#" class="nav-item aparajita-link" data-page="aparajita" onclick="showPage('aparajita')">
+                <i class="fas fa-heart"></i> <span>💕 For Aparajita</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <p>Made with ❤️ for Aparajita</p>
+            <p class="version">v2.0 • No Ads Forever</p>
+        </div>
+    </div>
+
+    <!-- ============ SIDEBAR OVERLAY (Mobile) ============ -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <!-- ============ MOBILE HEADER ============ -->
+    <div class="mobile-header">
+        <button class="menu-toggle" onclick="toggleSidebar()">
+            <i class="fas fa-bars"></i>
+        </button>
+        <span class="mobile-title">🎵 MyMusic</span>
+        <button class="mobile-search-btn" onclick="showPage('search')">
+            <i class="fas fa-search"></i>
+        </button>
+    </div>
+
+    <!-- ============ MAIN CONTENT ============ -->
+    <div class="main-content" id="mainContent">
+
+        <!-- ===== HOME PAGE ===== -->
+        <div id="page-home" class="page active">
+            <div class="hero">
+                <h1>Welcome to <span class="gradient-text">MyMusic</span> 🎵</h1>
+                <p>All Hindi & Bengali Songs • No Ads • Made for Aparajita 💕</p>
+                <div class="hero-stats">
+                    <div class="stat"><i class="fas fa-music"></i> Unlimited Songs</div>
+                    <div class="stat"><i class="fas fa-ban"></i> No Ads</div>
+                    <div class="stat"><i class="fas fa-heart"></i> Made with Love</div>
+                </div>
+            </div>
+
+            <div class="search-bar-home">
+                <i class="fas fa-search"></i>
+                <input type="text" id="homeSearch" placeholder="Search any Hindi or Bengali song, artist, album..."
+                    onkeypress="if(event.key==='Enter') { searchSongs(this.value); showPage('search'); }">
+                <button
+                    onclick="searchSongs(document.getElementById('homeSearch').value); showPage('search');">Search</button>
+            </div>
+
+            <h2 class="section-title">⚡ Quick Play</h2>
+            <div class="quick-categories">
+                <div class="category-card love" onclick="showPage('aparajita')">
+                    <div class="card-emoji">💕</div>
+                    <h3>For Aparajita</h3>
+                    <p>Special Love Playlist</p>
+                </div>
+                <div class="category-card hindi" onclick="quickSearch('latest bollywood songs 2024')">
+                    <div class="card-emoji">🎬</div>
+                    <h3>Latest Bollywood</h3>
+                    <p>New Releases</p>
+                </div>
+                <div class="category-card bengali" onclick="quickSearch('bengali new songs 2024')">
+                    <div class="card-emoji">🎶</div>
+                    <h3>Latest Bengali</h3>
+                    <p>New Releases</p>
+                </div>
+                <div class="category-card romantic" onclick="quickSearch('romantic hindi songs')">
+                    <div class="card-emoji">🌹</div>
+                    <h3>Romantic</h3>
+                    <p>Love Songs</p>
+                </div>
+                <div class="category-card retro" onclick="quickSearch('old hindi classic songs evergreen')">
+                    <div class="card-emoji">🎙️</div>
+                    <h3>Hindi Classics</h3>
+                    <p>Golden Era</p>
+                </div>
+                <div class="category-card classical" onclick="quickSearch('Rabindra Sangeet popular')">
+                    <div class="card-emoji">🎵</div>
+                    <h3>Rabindra Sangeet</h3>
+                    <p>Bengali Classics</p>
+                </div>
+                <div class="category-card party" onclick="quickSearch('hindi party songs')">
+                    <div class="card-emoji">🎉</div>
+                    <h3>Party Songs</h3>
+                    <p>Dance Hits</p>
+                </div>
+                <div class="category-card sad" onclick="quickSearch('hindi sad songs')">
+                    <div class="card-emoji">😢</div>
+                    <h3>Sad Songs</h3>
+                    <p>Emotional Hits</p>
+                </div>
+            </div>
+
+            <h2 class="section-title">🎤 Hindi Legends</h2>
+            <div class="artist-scroll">
+                <div class="artist-card" onclick="quickSearch('Lata Mangeshkar best songs')">
+                    <div class="artist-img" style="background: linear-gradient(135deg, #e91e63, #9c27b0);">LM</div>
+                    <p>Lata Mangeshkar</p>
+                </div>
+                <div class="artist-card" onclick="quickSearch('Kishore Kumar hit songs')">
+                    <div class="artist-img" style="background: linear-gradient(135deg, #ff9800, #f44336);">KK</div>
+                    <p>Kishore Kumar</p>
+                </div>
+                <div class="artist-card" onclick="quickSearch('Mohammed Rafi best songs')">
+                    <div class="artist-img" style="background: linear-gradient(135deg, #2196f3, #00bcd4);">MR</div>
+                    <p>Mohammed Rafi</p>
+                </div>
+                <div class="artist-card" onclick="quickSearch('Arijit Singh songs')">
+                    <div class="artist-img" style="background: linear-gradient(135deg, #1db954, #4caf50);">AS</div>
+                    <p>Arijit Singh</p>
+                </div>
+                <div class="artist-card" onclick="quickSearch('Shreya Ghoshal hindi songs')">
+                    <div class="artist-img" style="background: linear-gradient(135deg, #e91e63, #ff5722);">SG</div>
+                    <p>Shreya Ghoshal</p>
+                </div>
+                <div class="artist-card" onclick="quickSearch('Kumar Sanu romantic songs')">
+                    <div class="artist-img" style="background: linear-gradient(135deg, #9c27b0, #673ab7);">KS</div>
+                    <p>Kumar Sanu</p>
+                </div>
+                <div class="artist-card" onclick="quickSearch('Sonu Nigam hits')">
+                    <div class="artist-img" style="background: linear-gradient(135deg, #00bcd4, #2196f3);">SN</div>
+                    <p>Sonu Nigam</p>
+                </div>
+                <div class="artist-card" onclick="quickSearch('Udit Narayan songs')">
+                    <div class="artist-img" style="background: linear-gradient(135deg, #4caf50, #8bc34a);">UN</div>
+                    <p>Udit Narayan</p>
+                </div>
+            </div>
+
+            <h2 class="section-title">🎶 Bengali Legends</h2>
+            <div class="artist-scroll">
+                <div class="artist-card" onclick="quickSearch('Rabindra Sangeet best')">
+                    <div class="artist-img" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">RT</div>
+                    <p>Rabindranath</p>
+                </div>
+                <div class="artist-card" onclick="quickSearch('Hemanta Mukherjee bengali songs')">
+                    <div class="artist-img" style="background: linear-gradient(135deg, #27ae60, #2ecc71);">HM</div>
+                    <p>Hemanta</p>
+                </div>
+                <div class="artist-card" onclick="quickSearch('Anupam Roy bengali songs')">
+                    <div class="artist-img" style="background: linear-gradient(135deg, #8e44ad, #9b59b6);">AR</div>
+                    <p>Anupam Roy</p>
+                </div>
+                <div class="artist-card" onclick="quickSearch('Nachiketa Chakraborty bengali')">
+                    <div class="artist-img" style="background: linear-gradient(135deg, #d35400, #e67e22);">NC</div>
+                    <p>Nachiketa</p>
+                </div>
+                <div class="artist-card" onclick="quickSearch('Anjan Dutt bengali songs')">
+                    <div class="artist-img" style="background: linear-gradient(135deg, #16a085, #1abc9c);">AD</div>
+                    <p>Anjan Dutt</p>
+                </div>
+                <div class="artist-card" onclick="quickSearch('Arijit Singh bengali songs')">
+                    <div class="artist-img" style="background: linear-gradient(135deg, #1db954, #27ae60);">AS</div>
+                    <p>Arijit (Bengali)</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== SEARCH PAGE ===== -->
+        <div id="page-search" class="page">
+            <h1><i class="fas fa-search"></i> Search Songs</h1>
+            <div class="search-container">
+                <div class="search-input-wrap">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search any song, artist, album, movie..."
+                        onkeypress="if(event.key==='Enter') searchSongs(this.value)">
+                    <button class="clear-btn"
+                        onclick="document.getElementById('searchInput').value=''; document.getElementById('searchInput').focus();">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <button class="search-btn" onclick="searchSongs(document.getElementById('searchInput').value)">
+                    <i class="fas fa-search"></i> Search
+                </button>
+            </div>
+            <div class="search-filters">
+                <button class="filter-btn active" onclick="setSearchSource('all', this)">All Sources</button>
+                <button class="filter-btn" onclick="setSearchSource('jiosaavn', this)">JioSaavn</button>
+                <button class="filter-btn" onclick="setSearchSource('youtube', this)">YouTube</button>
+            </div>
+            <div id="searchResults" class="song-list">
+                <div class="empty-state">
+                    <i class="fas fa-search"></i>
+                    <h3>Search for any song</h3>
+                    <p>Hindi, Bengali, Old, New — Everything is here!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== TRENDING PAGE ===== -->
+        <div id="page-trending" class="page">
+            <h1><i class="fas fa-fire"></i> Trending Now</h1>
+            <div class="preset-buttons">
+                <button class="preset-active"
+                    onclick="searchSongs('trending hindi songs 2024'); highlightPreset(this)">🔥 Hindi Trending</button>
+                <button onclick="searchSongs('trending bengali songs 2024'); highlightPreset(this)">🔥 Bengali
+                    Trending</button>
+                <button onclick="searchSongs('bollywood party songs 2024'); highlightPreset(this)">🎉 Party</button>
+                <button onclick="searchSongs('new romantic hindi songs 2024'); highlightPreset(this)">🌹
+                    Romantic</button>
+                <button onclick="searchSongs('hindi lofi songs'); highlightPreset(this)">🌙 Lo-Fi</button>
+            </div>
+            <div id="trendingResults" class="song-list"></div>
+        </div>
+
+        <!-- ===== HINDI CLASSICS PAGE ===== -->
+        <div id="page-hindi" class="page">
+            <div class="page-header hindi-header">
+                <h1>⭐ Hindi Classics</h1>
+                <p>The golden era of Hindi music</p>
+            </div>
+            <div class="preset-buttons">
+                <button class="preset-active"
+                    onclick="searchSongs('evergreen hindi classic old songs'); highlightPreset(this)">🌟 All
+                    Classics</button>
+                <button onclick="searchSongs('Lata Mangeshkar old classic songs'); highlightPreset(this)">Lata
+                    Ji</button>
+                <button onclick="searchSongs('Kishore Kumar romantic songs'); highlightPreset(this)">Kishore Da</button>
+                <button onclick="searchSongs('Mohammed Rafi best songs'); highlightPreset(this)">Rafi Sahab</button>
+                <button onclick="searchSongs('90s hindi songs superhit'); highlightPreset(this)">90s Superhits</button>
+                <button
+                    onclick="searchSongs('old hindi romantic songs evergreen'); highlightPreset(this)">Romantic</button>
+                <button onclick="searchSongs('old hindi ghazal songs'); highlightPreset(this)">Ghazals</button>
+            </div>
+            <div id="hindiResults" class="song-list"></div>
+        </div>
+
+        <!-- ===== BENGALI CLASSICS PAGE ===== -->
+        <div id="page-bengali" class="page">
+            <div class="page-header bengali-header">
+                <h1>⭐ Bengali Classics</h1>
+                <p>The rich heritage of Bengali music</p>
+            </div>
+            <div class="preset-buttons">
+                <button class="preset-active"
+                    onclick="searchSongs('bengali classic old songs'); highlightPreset(this)">🌟 All Classics</button>
+                <button onclick="searchSongs('Rabindra Sangeet popular'); highlightPreset(this)">Rabindra
+                    Sangeet</button>
+                <button onclick="searchSongs('Nazrul Geeti popular'); highlightPreset(this)">Nazrul Geeti</button>
+                <button onclick="searchSongs('Anupam Roy songs'); highlightPreset(this)">Anupam Roy</button>
+                <button onclick="searchSongs('bengali folk songs baul'); highlightPreset(this)">Baul / Folk</button>
+                <button onclick="searchSongs('bengali romantic songs'); highlightPreset(this)">Romantic</button>
+            </div>
+            <div id="bengaliResults" class="song-list"></div>
+        </div>
+
+        <!-- ===== BOLLYWOOD PAGE ===== -->
+        <div id="page-bollywood" class="page">
+            <div class="page-header bollywood-header">
+                <h1>🎬 Bollywood Hits</h1>
+                <p>All-time Bollywood blockbusters</p>
+            </div>
+            <div class="preset-buttons">
+                <button class="preset-active"
+                    onclick="searchSongs('best bollywood songs all time'); highlightPreset(this)">🌟 All Time
+                    Best</button>
+                <button onclick="searchSongs('bollywood songs 2024 new'); highlightPreset(this)">2024 New</button>
+                <button onclick="searchSongs('bollywood romantic songs'); highlightPreset(this)">Romantic</button>
+                <button onclick="searchSongs('bollywood party dance songs'); highlightPreset(this)">Party</button>
+                <button onclick="searchSongs('Arijit Singh best songs'); highlightPreset(this)">Arijit Singh</button>
+            </div>
+            <div id="bollywoodResults" class="song-list"></div>
+        </div>
+
+        <!-- ===== YOUTUBE MUSIC PAGE ===== -->
+        <div id="page-youtube" class="page">
+            <div class="page-header youtube-header">
+                <h1><i class="fab fa-youtube"></i> YouTube Music</h1>
+                <p>Every song exists here!</p>
+            </div>
+            <div class="search-container">
+                <div class="search-input-wrap">
+                    <i class="fab fa-youtube" style="color: #ff0000;"></i>
+                    <input type="text" id="ytSearchInput" placeholder="Search any song on YouTube..."
+                        onkeypress="if(event.key==='Enter') searchYouTube(this.value)">
+                </div>
+                <button class="search-btn youtube-btn"
+                    onclick="searchYouTube(document.getElementById('ytSearchInput').value)">
+                    <i class="fab fa-youtube"></i> Search
+                </button>
+            </div>
+            <div id="youtubeResults" class="song-list">
+                <div class="empty-state">
+                    <i class="fab fa-youtube" style="color:#ff0000;"></i>
+                    <h3>Search YouTube for any song</h3>
+                    <p>If a song exists anywhere, it's on YouTube!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== 💕 APARAJITA PAGE ===== -->
+        <div id="page-aparajita" class="page">
+            <div class="aparajita-hero">
+                <div class="floating-hearts" id="floatingHearts"></div>
+                <div class="aparajita-hero-content">
+                    <p class="aparajita-pre">🎵 A Musical Love Letter 🎵</p>
+                    <h1 class="aparajita-title">For My Love</h1>
+                    <h2 class="aparajita-name">💕 Aparajita 💕</h2>
+                    <div class="aparajita-divider">♫ ─────── ♪ ─────── ♫</div>
+                    <p class="aparajita-quote">"তুমি আমার জীবনের সবচেয়ে সুন্দর গান"</p>
+                    <p class="aparajita-quote-hindi">"तुम मेरे दिल की सबसे खूबसूरत धड़कन हो"</p>
+                    <p class="aparajita-meaning">~ You are the most beautiful song of my life ~</p>
+                    <button class="play-all-btn" onclick="playAparajitaPlaylist()">
+                        <i class="fas fa-play"></i> Play All Songs
+                    </button>
+                </div>
+            </div>
+
+            <div class="aparajita-sections">
+                <div class="aparajita-section">
+                    <h2>🌹 Hindi Romantic — For You</h2>
+                    <div class="aparajita-playlist" id="aparajitaHindi">
+                        <div class="love-song" onclick="searchAndPlay('Lag Ja Gale Lata Mangeshkar')"><span
+                                class="song-num">01</span>
+                            <div class="love-song-info"><strong>Lag Ja Gale Ke Phir</strong><small>Lata Mangeshkar • Woh
+                                    Kaun Thi</small></div><i class="fas fa-play love-play-icon"></i>
+                        </div>
+                        <div class="love-song" onclick="searchAndPlay('Tujhe Dekha Toh Ye Jana Sanam DDLJ')"><span
+                                class="song-num">02</span>
+                            <div class="love-song-info"><strong>Tujhe Dekha Toh Ye Jaana Sanam</strong><small>Kumar Sanu
+                                    & Lata • DDLJ</small></div><i class="fas fa-play love-play-icon"></i>
+                        </div>
+                        <div class="love-song" onclick="searchAndPlay('Pehla Nasha Jo Jeeta Wohi Sikandar')"><span
+                                class="song-num">03</span>
+                            <div class="love-song-info"><strong>Pehla Nasha</strong><small>Udit Narayan & Sadhana
+                                    Sargam</small></div><i class="fas fa-play love-play-icon"></i>
+                        </div>
+                        <div class="love-song" onclick="searchAndPlay('Tum Hi Ho Arijit Singh Aashiqui 2')"><span
+                                class="song-num">04</span>
+                            <div class="love-song-info"><strong>Tum Hi Ho</strong><small>Arijit Singh • Aashiqui
+                                    2</small></div><i class="fas fa-play love-play-icon"></i>
+                        </div>
+                        <div class="love-song" onclick="searchAndPlay('Pal Pal Dil Ke Paas Kishore Kumar')"><span
+                                class="song-num">05</span>
+                            <div class="love-song-info"><strong>Pal Pal Dil Ke Paas</strong><small>Kishore Kumar</small>
+                            </div><i class="fas fa-play love-play-icon"></i>
+                        </div>
+                        <div class="love-song" onclick="searchAndPlay('Tum Se Hi Jab We Met Mohit Chauhan')"><span
+                                class="song-num">06</span>
+                            <div class="love-song-info"><strong>Tum Se Hi</strong><small>Mohit Chauhan • Jab We
+                                    Met</small></div><i class="fas fa-play love-play-icon"></i>
+                        </div>
+                        <div class="love-song" onclick="searchAndPlay('Channa Mereya Arijit Singh')"><span
+                                class="song-num">07</span>
+                            <div class="love-song-info"><strong>Channa Mereya</strong><small>Arijit Singh • Ae Dil Hai
+                                    Mushkil</small></div><i class="fas fa-play love-play-icon"></i>
+                        </div>
+                        <div class="love-song" onclick="searchAndPlay('Tera Ban Jaunga Kabir Singh')"><span
+                                class="song-num">08</span>
+                            <div class="love-song-info"><strong>Tera Ban Jaunga</strong><small>Akhil & Tulsi
+                                    Kumar</small></div><i class="fas fa-play love-play-icon"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="aparajita-section">
+                    <h2>🌸 Bengali Songs — তোমার জন্য</h2>
+                    <div class="aparajita-playlist" id="aparajitaBengali">
+                        <div class="love-song bengali-love"
+                            onclick="searchAndPlay('Ami Chini Go Chini Tomare Rabindra Sangeet')"><span
+                                class="song-num">01</span>
+                            <div class="love-song-info"><strong>আমি চিনি গো চিনি তোমারে</strong><small>Rabindra
+                                    Sangeet</small></div><i class="fas fa-play love-play-icon"></i>
+                        </div>
+                        <div class="love-song bengali-love"
+                            onclick="searchAndPlay('Tumi Robe Nirobe Rabindra Sangeet')"><span
+                                class="song-num">02</span>
+                            <div class="love-song-info"><strong>তুমি রবে নীরবে</strong><small>Rabindra Sangeet</small>
+                            </div><i class="fas fa-play love-play-icon"></i>
+                        </div>
+                        <div class="love-song bengali-love"
+                            onclick="searchAndPlay('Ei Poth Jodi Na Shesh Hoy Hemanta')"><span
+                                class="song-num">03</span>
+                            <div class="love-song-info"><strong>এই পথ যদি না শেষ হয়</strong><small>Hemanta
+                                    Mukherjee</small></div><i class="fas fa-play love-play-icon"></i>
+                        </div>
+                        <div class="love-song bengali-love"
+                            onclick="searchAndPlay('Amake Amar Moto Thakte Dao Anupam Roy')"><span
+                                class="song-num">04</span>
+                            <div class="love-song-info"><strong>আমাকে আমার মতো থাকতে দাও</strong><small>Anupam Roy •
+                                    Autograph</small></div><i class="fas fa-play love-play-icon"></i>
+                        </div>
+                        <div class="love-song bengali-love" onclick="searchAndPlay('Bela Bose Anjan Dutt')"><span
+                                class="song-num">05</span>
+                            <div class="love-song-info"><strong>বেলা বোস</strong><small>Anjan Dutt</small></div><i
+                                class="fas fa-play love-play-icon"></i>
+                        </div>
+                        <div class="love-song bengali-love"
+                            onclick="searchAndPlay('Tomake Chai Gangster Arijit Singh bengali')"><span
+                                class="song-num">06</span>
+                            <div class="love-song-info"><strong>তোমাকে চাই</strong><small>Arijit Singh •
+                                    Gangster</small></div><i class="fas fa-play love-play-icon"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="love-message-box">
+                    <div class="love-msg-icon">💌</div>
+                    <h2>A Message for Aparajita</h2>
+                    <div class="love-msg-content">
+                        <p class="bengali-msg">"অপরাজিতা, তুমি আমার হৃদয়ের গান।<br>প্রতিটি সুর তোমার জন্য, প্রতিটি কথা
+                            তোমার নামে। 💕"</p>
+                        <p class="hindi-msg">"अपराजिता, तुम मेरे दिल की धड़कन हो।<br>हर गाना तुम्हारे लिए, हर सुर
+                            तुम्हारे नाम। 💕"</p>
+                        <p class="english-msg">"Every line of code is a love letter,<br>Every song is dedicated to you.
+                            💕"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== PLAYLIST PAGE ===== -->
+        <div id="page-playlist" class="page">
+            <h1><i class="fas fa-list"></i> My Playlist</h1>
+            <div class="playlist-actions" id="playlistActions" style="display:none;">
+                <button onclick="playAllPlaylist()"><i class="fas fa-play"></i> Play All</button>
+                <button onclick="shufflePlaylist()"><i class="fas fa-random"></i> Shuffle</button>
+                <button onclick="clearPlaylist()"><i class="fas fa-trash"></i> Clear All</button>
+            </div>
+            <div id="myPlaylist" class="song-list">
+                <div class="empty-state"><i class="fas fa-music"></i>
+                    <h3>Playlist is empty</h3>
+                    <p>Search and tap + to add songs!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== FAVORITES PAGE ===== -->
+        <div id="page-favorites" class="page">
+            <h1><i class="fas fa-heart" style="color:#ff6b9d;"></i> Favorites</h1>
+            <div id="myFavorites" class="song-list">
+                <div class="empty-state"><i class="fas fa-heart" style="color:#ff6b9d;"></i>
+                    <h3>No favorites yet</h3>
+                    <p>Tap the heart on songs you love!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== HISTORY PAGE ===== -->
+        <div id="page-history" class="page">
+            <h1><i class="fas fa-history"></i> Recently Played</h1>
+            <button class="clear-history-btn" onclick="clearHistory()"><i class="fas fa-trash"></i> Clear
+                History</button>
+            <div id="myHistory" class="song-list">
+                <div class="empty-state"><i class="fas fa-history"></i>
+                    <h3>No history yet</h3>
+                    <p>Songs you play will appear here</p>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- END MAIN CONTENT -->
+
+    <!-- ============ HIDDEN YOUTUBE PLAYER ============ -->
+    <div id="ytPlayerContainer" style="position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;overflow:hidden;">
+        <div id="ytPlayer"></div>
+    </div>
+
+    <!-- ============ MUSIC PLAYER BAR ============ -->
+    <div class="player" id="player">
+        <div class="player-progress-top">
+            <input type="range" id="progressBar" min="0" max="100" value="0" step="0.1" oninput="seekTo(this.value)">
+        </div>
+        <div class="player-main">
+            <div class="player-info">
+                <img id="playerImg"
+                    src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'><rect fill='%231a1a2e' width='50' height='50' rx='8'/><text x='25' y='32' text-anchor='middle' fill='%231db954' font-size='22'>♪</text></svg>"
+                    alt="Album" class="player-album-art" id="playerAlbumArt">
+                <div class="player-text">
+                    <p id="playerTitle" class="player-song-name">No song playing</p>
+                    <p id="playerArtist" class="player-artist-name">Search and play a song</p>
+                </div>
+                <button class="player-like-btn" onclick="toggleCurrentLike()" id="likeBtn" title="Favorite"><i
+                        class="far fa-heart"></i></button>
+            </div>
+            <div class="player-controls">
+                <button onclick="toggleShuffle()" id="shuffleBtn" title="Shuffle"><i class="fas fa-random"></i></button>
+                <button onclick="prevSong()" title="Previous"><i class="fas fa-step-backward"></i></button>
+                <button class="play-btn" onclick="togglePlay()" id="playBtn" title="Play"><i
+                        class="fas fa-play"></i></button>
+                <button onclick="nextSong()" title="Next"><i class="fas fa-step-forward"></i></button>
+                <button onclick="toggleRepeat()" id="repeatBtn" title="Repeat"><i class="fas fa-redo"></i></button>
+            </div>
+            <div class="player-right">
+                <span id="currentTime" class="time-display">0:00</span>
+                <span class="time-sep">/</span>
+                <span id="totalTime" class="time-display">0:00</span>
+                <div class="volume-control">
+                    <button onclick="toggleMute()" id="volumeIcon"><i class="fas fa-volume-up"></i></button>
+                    <input type="range" id="volumeBar" min="0" max="100" value="80" oninput="setVolume(this.value)">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ AUDIO ELEMENT ============ -->
+    <audio id="audioPlayer" preload="auto" crossorigin="anonymous"></audio>
+
+    <!-- ============ TOAST ============ -->
+    <div id="toast" class="toast"></div>
+
+    <!-- ============ YouTube IFrame API ============ -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <!-- ============ MAIN APP SCRIPT ============ -->
+    <script src="app.js"></script>
+
+    <!-- ============ SERVICE WORKER ============ -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').then(() => console.log('SW registered')).catch(e => console.log('SW error:', e));
+        }
+    </script>
+</body>
+
+</html>

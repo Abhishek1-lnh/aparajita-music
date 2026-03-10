@@ -1,0 +1,1594 @@
+/* ═══════════════════════════════════════════════
+   MyMusic For Aparajita - Complete Stylesheet
+   ═══════════════════════════════════════════════ */
+
+/* ============ RESET & BASE ============ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+    background: #0a0a1a;
+    color: #e0e0e0;
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+    background: #1db954;
+    color: white;
+}
+
+/* ============ SPLASH SCREEN ============ */
+.splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #0a0a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.5s, visibility 0.5s;
+}
+
+.splash-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.splash-content {
+    text-align: center;
+}
+
+.splash-icon {
+    font-size: 80px;
+    animation: bounce 1s ease infinite;
+}
+
+.splash-content h1 {
+    font-size: 36px;
+    background: linear-gradient(135deg, #1db954, #1ed760);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 10px 0 5px;
+}
+
+.splash-content p {
+    color: #ff6b9d;
+    font-size: 16px;
+}
+
+.splash-loader {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #1a1a2e;
+    border-top-color: #1db954;
+    border-radius: 50%;
+    margin: 20px auto;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+/* ============ SIDEBAR ============ */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px;
+    height: 100vh;
+    background: #0d0d20;
+    border-right: 1px solid #1a1a30;
+    padding: 20px 15px;
+    z-index: 500;
+    overflow-y: auto;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 4px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 2px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 5px 10px;
+    margin-bottom: 15px;
+}
+
+.logo-icon {
+    font-size: 32px;
+}
+
+.logo-text {
+    font-size: 22px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #1db954, #1ed760);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.logo-sub {
+    display: block;
+    font-size: 11px;
+    color: #ff6b9d;
+    font-weight: 400;
+}
+
+.sidebar-search {
+    display: flex;
+    align-items: center;
+    background: #151530;
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin-bottom: 15px;
+    border: 1px solid #1f1f3a;
+}
+
+.sidebar-search i {
+    color: #555;
+    margin-right: 8px;
+    font-size: 13px;
+}
+
+.sidebar-search input {
+    background: none;
+    border: none;
+    color: #ccc;
+    font-size: 13px;
+    width: 100%;
+    outline: none;
+    font-family: inherit;
+}
+
+nav {
+    flex: 1;
+}
+
+.nav-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: #444;
+    letter-spacing: 1.5px;
+    padding: 15px 12px 5px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    color: #888;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-bottom: 2px;
+    transition: all 0.2s;
+    font-size: 14px;
+    font-weight: 500;
+    position: relative;
+}
+
+.nav-item:hover {
+    background: rgba(29, 185, 84, 0.1);
+    color: #ccc;
+}
+
+.nav-item.active {
+    background: rgba(29, 185, 84, 0.15);
+    color: #1db954;
+}
+
+.nav-item i {
+    width: 18px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.aparajita-link {
+    background: linear-gradient(135deg, rgba(255, 107, 157, 0.1), rgba(255, 45, 117, 0.1)) !important;
+    color: #ff6b9d !important;
+    margin-top: 5px;
+}
+
+.aparajita-link:hover {
+    background: linear-gradient(135deg, rgba(255, 107, 157, 0.2), rgba(255, 45, 117, 0.2)) !important;
+    color: #ff8ab5 !important;
+}
+
+.badge {
+    background: #1db954;
+    color: white;
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 10px;
+    margin-left: auto;
+}
+
+.sidebar-footer {
+    padding: 15px 10px;
+    border-top: 1px solid #1a1a30;
+    margin-top: 10px;
+}
+
+.sidebar-footer p {
+    font-size: 11px;
+    color: #444;
+    text-align: center;
+}
+
+.version {
+    margin-top: 3px;
+    font-size: 10px !important;
+}
+
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 400;
+}
+
+/* ============ MOBILE HEADER ============ */
+.mobile-header {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 55px;
+    background: #0d0d20;
+    border-bottom: 1px solid #1a1a30;
+    z-index: 300;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+}
+
+.menu-toggle,
+.mobile-search-btn {
+    background: none;
+    border: none;
+    color: #ccc;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.mobile-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1db954;
+}
+
+/* ============ MAIN CONTENT ============ */
+.main-content {
+    margin-left: 250px;
+    padding: 25px 30px;
+    padding-bottom: 140px;
+    min-height: 100vh;
+}
+
+.page {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.page.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============ HERO ============ */
+.hero {
+    text-align: center;
+    padding: 50px 20px 30px;
+}
+
+.hero h1 {
+    font-size: 38px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, #1db954, #1ed760, #00ff88);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero>p {
+    color: #777;
+    font-size: 16px;
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #888;
+    font-size: 14px;
+}
+
+.stat i {
+    color: #1db954;
+}
+
+/* ============ SEARCH BAR HOME ============ */
+.search-bar-home {
+    display: flex;
+    align-items: center;
+    background: #111128;
+    border-radius: 50px;
+    padding: 5px 8px 5px 20px;
+    max-width: 650px;
+    margin: 0 auto 35px;
+    border: 2px solid #1a1a35;
+    transition: border-color 0.3s;
+}
+
+.search-bar-home:focus-within {
+    border-color: #1db954;
+}
+
+.search-bar-home>i {
+    color: #555;
+    margin-right: 10px;
+}
+
+.search-bar-home input {
+    flex: 1;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 15px;
+    padding: 12px 0;
+    outline: none;
+    font-family: inherit;
+}
+
+.search-bar-home button {
+    background: #1db954;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: inherit;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.search-bar-home button:hover {
+    background: #1ed760;
+}
+
+/* ============ SECTION TITLES ============ */
+.section-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 30px 0 15px;
+}
+
+/* ============ QUICK CATEGORIES ============ */
+.quick-categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.category-card {
+    padding: 22px 18px;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.category-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.card-emoji {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.category-card h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+
+.category-card p {
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+.love {
+    background: linear-gradient(135deg, #ff006e, #ff4d94);
+}
+
+.hindi {
+    background: linear-gradient(135deg, #e63946, #c1121f);
+}
+
+.bengali {
+    background: linear-gradient(135deg, #06d6a0, #118ab2);
+}
+
+.romantic {
+    background: linear-gradient(135deg, #e91e63, #880e4f);
+}
+
+.retro {
+    background: linear-gradient(135deg, #ff9800, #e65100);
+}
+
+.classical {
+    background: linear-gradient(135deg, #9c27b0, #4a148c);
+}
+
+.party {
+    background: linear-gradient(135deg, #ffca28, #ff6f00);
+    color: #333;
+}
+
+.sad {
+    background: linear-gradient(135deg, #546e7a, #263238);
+}
+
+/* ============ ARTIST SCROLL ============ */
+.artist-scroll {
+    display: flex;
+    gap: 18px;
+    overflow-x: auto;
+    padding: 10px 0 15px;
+    scrollbar-width: thin;
+    scrollbar-color: #222 transparent;
+}
+
+.artist-scroll::-webkit-scrollbar {
+    height: 4px;
+}
+
+.artist-scroll::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 2px;
+}
+
+.artist-card {
+    text-align: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: transform 0.3s;
+    width: 85px;
+}
+
+.artist-card:hover {
+    transform: scale(1.1);
+}
+
+.artist-img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 20px;
+    margin: 0 auto 8px;
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.artist-card p {
+    font-size: 11px;
+    color: #999;
+    line-height: 1.3;
+}
+
+/* ============ SEARCH PAGE ============ */
+.search-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.search-input-wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    background: #111128;
+    border: 2px solid #1a1a35;
+    border-radius: 12px;
+    padding: 0 15px;
+    transition: border-color 0.3s;
+}
+
+.search-input-wrap:focus-within {
+    border-color: #1db954;
+}
+
+.search-input-wrap i {
+    color: #555;
+    margin-right: 10px;
+}
+
+.search-input-wrap input {
+    flex: 1;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 15px;
+    padding: 14px 0;
+    outline: none;
+    font-family: inherit;
+}
+
+.clear-btn {
+    background: none;
+    border: none;
+    color: #555;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 14px;
+}
+
+.search-btn {
+    padding: 14px 25px;
+    background: #1db954;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: inherit;
+    transition: background 0.3s;
+    white-space: nowrap;
+}
+
+.search-btn:hover {
+    background: #1ed760;
+}
+
+.youtube-btn {
+    background: #cc0000 !important;
+}
+
+.youtube-btn:hover {
+    background: #ff0000 !important;
+}
+
+.search-filters {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.filter-btn {
+    padding: 6px 16px;
+    background: #151530;
+    color: #888;
+    border: 1px solid #1f1f3a;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: inherit;
+    transition: all 0.3s;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+    background: #1db954;
+    color: white;
+    border-color: #1db954;
+}
+
+/* ============ PRESET BUTTONS ============ */
+.preset-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.preset-buttons button {
+    padding: 7px 16px;
+    background: #111128;
+    color: #aaa;
+    border: 1px solid #1f1f3a;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: inherit;
+    transition: all 0.3s;
+}
+
+.preset-buttons button:hover,
+.preset-buttons button.preset-active {
+    background: #1db954;
+    color: white;
+    border-color: #1db954;
+}
+
+/* ============ PAGE HEADERS ============ */
+.page-header {
+    padding: 30px 25px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+}
+
+.page-header h1 {
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
+.page-header p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+}
+
+.hindi-header {
+    background: linear-gradient(135deg, #1a0505, #2d0a0a, #0a0a1a);
+}
+
+.bengali-header {
+    background: linear-gradient(135deg, #051a15, #0a2d20, #0a0a1a);
+}
+
+.bollywood-header {
+    background: linear-gradient(135deg, #1a0f05, #2d1a0a, #0a0a1a);
+}
+
+.youtube-header {
+    background: linear-gradient(135deg, #1a0505, #2d0505, #0a0a1a);
+}
+
+/* ============ SONG LIST ============ */
+.song-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.song-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    background: #0e0e22;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    gap: 14px;
+    border: 1px solid transparent;
+}
+
+.song-item:hover {
+    background: #151535;
+    border-color: #1f1f40;
+}
+
+.song-item.playing {
+    background: rgba(29, 185, 84, 0.1);
+    border-color: #1db95440;
+}
+
+.song-item.playing .song-name {
+    color: #1db954;
+}
+
+.song-thumbnail {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: #1a1a2e;
+}
+
+.song-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.song-name {
+    font-weight: 600;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.song-artist {
+    font-size: 12px;
+    color: #777;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.song-duration {
+    color: #555;
+    font-size: 12px;
+    flex-shrink: 0;
+}
+
+.song-actions {
+    display: flex;
+    gap: 2px;
+    flex-shrink: 0;
+}
+
+.song-actions button {
+    background: none;
+    border: none;
+    color: #555;
+    cursor: pointer;
+    padding: 6px 8px;
+    font-size: 14px;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.song-actions button:hover {
+    color: #1db954;
+    background: rgba(29, 185, 84, 0.1);
+}
+
+.song-source {
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.source-jiosaavn {
+    background: #1db95420;
+    color: #1db954;
+}
+
+.source-youtube {
+    background: #ff000020;
+    color: #ff4444;
+}
+
+/* ============ EMPTY STATE ============ */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #444;
+}
+
+.empty-state i {
+    font-size: 50px;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.empty-state h3 {
+    font-size: 20px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.empty-state p {
+    font-size: 14px;
+}
+
+.loading {
+    text-align: center;
+    padding: 50px;
+    color: #1db954;
+    font-size: 16px;
+}
+
+/* ============ PLAYLIST ACTIONS ============ */
+.playlist-actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.playlist-actions button {
+    padding: 8px 18px;
+    background: #151530;
+    color: #ccc;
+    border: 1px solid #1f1f3a;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 13px;
+    transition: all 0.3s;
+}
+
+.playlist-actions button:hover {
+    background: #1db954;
+    color: white;
+    border-color: #1db954;
+}
+
+.clear-history-btn {
+    padding: 8px 18px;
+    background: #1a0505;
+    color: #e74c3c;
+    border: 1px solid #2a1515;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 13px;
+    margin-bottom: 15px;
+    transition: all 0.3s;
+}
+
+.clear-history-btn:hover {
+    background: #e74c3c;
+    color: white;
+}
+
+/* ═══════════ APARAJITA PAGE ═══════════ */
+.aparajita-hero {
+    text-align: center;
+    padding: 60px 20px;
+    background: linear-gradient(135deg, #1a0015, #200020, #150025, #0a0a1a);
+    border-radius: 20px;
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.floating-hearts {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.floating-heart {
+    position: absolute;
+    font-size: 20px;
+    opacity: 0.15;
+    animation: floatHeart 8s ease-in-out infinite;
+}
+
+@keyframes floatHeart {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-25px) rotate(8deg);
+    }
+}
+
+.aparajita-hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.aparajita-pre {
+    color: #ff6b9d;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.aparajita-title {
+    font-size: 30px;
+    color: #ff8ab5;
+    font-weight: 600;
+}
+
+.aparajita-name {
+    font-size: 52px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ff6b9d, #ff2d75, #ff8ab5, #ff6b9d);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 4s ease infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.aparajita-divider {
+    color: #ff6b9d40;
+    font-size: 14px;
+    margin: 10px 0;
+}
+
+.aparajita-quote {
+    font-size: 18px;
+    color: #ff8ab5;
+    font-style: italic;
+    margin-bottom: 5px;
+}
+
+.aparajita-quote-hindi {
+    font-size: 16px;
+    color: #ff6b9d;
+    font-style: italic;
+    margin-bottom: 8px;
+}
+
+.aparajita-meaning {
+    color: #886;
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.play-all-btn {
+    padding: 12px 30px;
+    background: linear-gradient(135deg, #ff2d75, #ff6b9d);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.3s;
+    box-shadow: 0 4px 20px rgba(255, 45, 117, 0.3);
+}
+
+.play-all-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 30px rgba(255, 45, 117, 0.5);
+}
+
+.aparajita-section {
+    margin-bottom: 30px;
+}
+
+.aparajita-section h2 {
+    font-size: 20px;
+    color: #ff6b9d;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.love-song {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 13px 16px;
+    background: linear-gradient(135deg, #150010, #12001a);
+    border-radius: 10px;
+    margin-bottom: 6px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 1px solid #1f0020;
+}
+
+.love-song:hover {
+    background: linear-gradient(135deg, #200018, #1a0025);
+    transform: translateX(6px);
+    border-color: #ff6b9d50;
+}
+
+.bengali-love {
+    background: linear-gradient(135deg, #001015, #000a1a) !important;
+    border-color: #0a1a2a !important;
+}
+
+.bengali-love:hover {
+    background: linear-gradient(135deg, #001520, #001025) !important;
+    border-color: #4ecdc450 !important;
+}
+
+.song-num {
+    color: #ff6b9d;
+    font-weight: 700;
+    font-size: 16px;
+    width: 28px;
+    flex-shrink: 0;
+    text-align: center;
+}
+
+.bengali-love .song-num {
+    color: #4ecdc4;
+}
+
+.love-song-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.love-song-info strong {
+    display: block;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.love-song-info small {
+    color: #777;
+    font-size: 12px;
+}
+
+.love-play-icon {
+    color: #ff6b9d;
+    flex-shrink: 0;
+}
+
+.bengali-love .love-play-icon {
+    color: #4ecdc4;
+}
+
+.love-message-box {
+    background: linear-gradient(135deg, #150010, #0a0020);
+    border: 1px solid #ff6b9d25;
+    border-radius: 20px;
+    padding: 35px 30px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.love-msg-icon {
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
+.love-message-box h2 {
+    color: #ff6b9d;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.love-msg-content p {
+    line-height: 1.9;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+.bengali-msg {
+    color: #4ecdc4;
+}
+
+.hindi-msg {
+    color: #ff8ab5;
+}
+
+.english-msg {
+    color: #888;
+    font-style: italic;
+}
+
+/* ═══════════ PLAYER BAR ═══════════ */
+.player {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #0f0f25;
+    border-top: 1px solid #1a1a35;
+    z-index: 600;
+}
+
+.player-progress-top {
+    width: 100%;
+    padding: 0;
+    margin-top: -2px;
+}
+
+.player-progress-top input[type="range"] {
+    width: 100%;
+    -webkit-appearance: none;
+    height: 3px;
+    background: #1a1a35;
+    outline: none;
+    display: block;
+    cursor: pointer;
+    transition: height 0.2s;
+}
+
+.player-progress-top input[type="range"]:hover {
+    height: 5px;
+}
+
+.player-progress-top input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    background: #1db954;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.player-progress-top:hover input[type="range"]::-webkit-slider-thumb {
+    opacity: 1;
+}
+
+.player-progress-top input[type="range"]::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    background: #1db954;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.player-progress-top input[type="range"]::-moz-range-track {
+    background: #1a1a35;
+}
+
+.player-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 20px 12px;
+    gap: 15px;
+}
+
+.player-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+}
+
+.player-album-art {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: #1a1a2e;
+}
+
+.player-text {
+    min-width: 0;
+    flex: 1;
+}
+
+.player-song-name {
+    font-weight: 600;
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.player-artist-name {
+    font-size: 11px;
+    color: #777;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.player-like-btn {
+    background: none;
+    border: none;
+    color: #555;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 5px;
+    flex-shrink: 0;
+    transition: color 0.3s;
+}
+
+.player-like-btn.liked {
+    color: #ff6b9d;
+}
+
+.player-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.player-controls button {
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 50%;
+    transition: all 0.2s;
+}
+
+.player-controls button:hover {
+    color: white;
+}
+
+.player-controls button.active {
+    color: #1db954;
+}
+
+.play-btn {
+    background: #1db954 !important;
+    color: white !important;
+    width: 38px;
+    height: 38px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px !important;
+}
+
+.play-btn:hover {
+    background: #1ed760 !important;
+    transform: scale(1.05);
+}
+
+.player-right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.time-display {
+    font-size: 11px;
+    color: #666;
+    font-variant-numeric: tabular-nums;
+}
+
+.time-sep {
+    font-size: 11px;
+    color: #444;
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: 10px;
+}
+
+.volume-control button {
+    background: none;
+    border: none;
+    color: #888;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 4px;
+}
+
+.volume-control input[type="range"] {
+    width: 80px;
+    -webkit-appearance: none;
+    height: 3px;
+    background: #2a2a3e;
+    border-radius: 2px;
+    outline: none;
+}
+
+.volume-control input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.volume-control input[type="range"]::-moz-range-thumb {
+    width: 10px;
+    height: 10px;
+    background: #fff;
+    border-radius: 50%;
+    border: none;
+}
+
+/* ============ TOAST ============ */
+.toast {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: #1db954;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 9000;
+    transition: transform 0.3s ease, opacity 0.3s;
+    opacity: 0;
+    pointer-events: none;
+    white-space: nowrap;
+    box-shadow: 0 4px 20px rgba(29, 185, 84, 0.4);
+}
+
+.toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+.toast.error {
+    background: #e74c3c;
+    box-shadow: 0 4px 20px rgba(231, 76, 60, 0.4);
+}
+
+/* ═══════════════════════════════════
+   RESPONSIVE DESIGN (COMPLETE)
+   ═══════════════════════════════════ */
+@media (max-width: 900px) {
+    .player-right .volume-control {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        width: 280px;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .sidebar-overlay.show {
+        display: block;
+    }
+
+    .mobile-header {
+        display: flex;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 15px;
+        padding-top: 65px;
+        padding-bottom: 130px;
+    }
+
+    .hero h1 {
+        font-size: 26px;
+    }
+
+    .hero-stats {
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .stat {
+        font-size: 12px;
+    }
+
+    .search-bar-home {
+        padding: 3px 5px 3px 15px;
+    }
+
+    .search-bar-home input {
+        font-size: 13px;
+        padding: 10px 0;
+    }
+
+    .search-bar-home button {
+        padding: 8px 18px;
+        font-size: 13px;
+    }
+
+    .quick-categories {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .category-card {
+        padding: 16px 14px;
+    }
+
+    .section-title {
+        font-size: 18px;
+        margin: 20px 0 10px;
+    }
+
+    .search-container {
+        flex-direction: column;
+    }
+
+    .search-btn {
+        width: 100%;
+        padding: 12px;
+    }
+
+    .preset-buttons {
+        gap: 6px;
+    }
+
+    .preset-buttons button {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    .page-header {
+        padding: 20px 18px;
+    }
+
+    .page-header h1 {
+        font-size: 22px;
+    }
+
+    .aparajita-hero {
+        padding: 40px 15px;
+    }
+
+    .aparajita-name {
+        font-size: 36px;
+    }
+
+    .aparajita-quote {
+        font-size: 15px;
+    }
+
+    .player-main {
+        padding: 6px 12px 10px;
+        gap: 10px;
+    }
+
+    .player-album-art {
+        width: 40px;
+        height: 40px;
+    }
+
+    .player-song-name {
+        font-size: 12px;
+    }
+
+    .player-controls {
+        gap: 4px;
+    }
+
+    .player-controls button {
+        font-size: 14px;
+        padding: 4px;
+    }
+
+    .play-btn {
+        width: 34px;
+        height: 34px;
+    }
+
+    .player-right .time-display,
+    .player-right .time-sep {
+        display: none;
+    }
+
+    .song-item {
+        padding: 8px 10px;
+        gap: 10px;
+    }
+
+    .song-thumbnail {
+        width: 42px;
+        height: 42px;
+    }
+
+    .song-name {
+        font-size: 13px;
+    }
+
+    .song-actions button {
+        padding: 4px 6px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .quick-categories {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero h1 {
+        font-size: 22px;
+    }
+
+    .aparajita-name {
+        font-size: 28px;
+    }
+
+    .love-song {
+        padding: 10px 12px;
+        gap: 10px;
+    }
+
+    .song-num {
+        font-size: 14px;
+        width: 22px;
+    }
+
+    .love-message-box {
+        padding: 25px 18px;
+    }
+
+    .artist-img {
+        width: 60px;
+        height: 60px;
+        font-size: 17px;
+    }
+
+    .artist-card {
+        width: 75px;
+    }
+
+    .artist-card p {
+        font-size: 10px;
+    }
+}
